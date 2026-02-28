@@ -8,6 +8,7 @@ typedef int32_t s32;
 
 
 const int TILE_SIZE = 32;
+//const int MARGIN = TILE_SIZE/4;
 const s32 CHUNK_SIZE = 8;
 const s32 chunkMarginX = 3;
 const s32 chunkMarginY = 2;

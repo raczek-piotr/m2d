@@ -7,7 +7,7 @@ typedef uint32_t u32;
 typedef int32_t  s32;
 
 
-const s32 worldMapM = ((u16)-1)+1;
+const s32 worldMapM = ((u8)-1)+1;
 const s32 seed = 54002;
 
 

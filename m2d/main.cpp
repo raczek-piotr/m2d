@@ -12,10 +12,7 @@
 #include "voxels.cpp"
 
 using namespace std;
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef int32_t s32;
+
 
 const int PORT = 54002;
 const char* SERVER_IP = "T440s.local"; //192.168.212.108
@@ -76,8 +73,8 @@ int main() {
     // --- SFML window ---
     sf::RenderWindow window(sf::VideoMode(screenX, screenY), "m2d GameJam");
 
-    vector<u16> availableBlocks = {1, 2, 3, 4, 5, 6, 0};
-    u16 selectedBlock = 0;
+    vector<u8> availableBlocks = {1, 2, 3, 4, 5, 6, 0};
+    u8 selectedBlock = 0;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -116,7 +113,7 @@ int main() {
 		static float time = 0;
 		time += dt;
 		if (--counter < 0) {
-			cout<<64/time<<" ping: "<<1000*time/64<<'\n';
+			cout<<64/time<<" draw time: "<<1000*time/64<<'\n';
 			time = 0;
 			counter = 64;
 		}
@@ -155,15 +152,6 @@ int main() {
 			pv -= pa * dt;
 			if (pv < -TILE_SIZE) pv = -TILE_SIZE;
 		} else pv = 0;
-
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		//	py -= speed * dt;
-		//}
-		//if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		//	py += speed * dt;
-		//}
-		prot += 180*dt;
-		if (dt > 360) dt -= 360;
 
 	// camera move
 	// if → while (if velosity fill be greater)
@@ -397,5 +385,5 @@ descriptor[chunk->chunk[y][x]%16](window, (cx*CHUNK_SIZE + x)*TILE_SIZE - tx, (c
     //    rect.setFillColor(sf::Color::Red);
     //    window.draw(rect);
     //}
-    drawPlayer(window, prot);
+    drawPlayer(window, 2*px*TILE_SIZE);
 }
