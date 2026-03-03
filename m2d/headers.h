@@ -7,7 +7,7 @@ typedef uint32_t u32;
 typedef int32_t s32;
 
 
-const int TILE_SIZE = 32;
+const int TILE_SIZE = 48;
 //const int MARGIN = TILE_SIZE/4;
 const s32 CHUNK_SIZE = 8;
 const s32 chunkMarginX = 3;
@@ -20,3 +20,8 @@ const int screenX = 1200;
 const int screenY = 800;
 const int screenXhalf = screenX/2;
 const int screenYhalf = screenY/2;
+
+
+const float speed = TILE_SIZE/6; // blocks per second
+const float jump = TILE_SIZE/2;
+const float gravity = TILE_SIZE;

@@ -15,7 +15,7 @@ using namespace std;
 
 
 const int PORT = 54002;
-const char* SERVER_IP = "T440s.local"; //192.168.212.108
+const char* SERVER_IP = "0.0.0.0";
 
 
 struct chunk_t {
@@ -106,7 +106,6 @@ int main() {
         py = mousePos.y;*/
         
         // --- Movement by arrow keys ---
-		float speed = 5.0f; // blocks per second
 		static sf::Clock moveClock;
 		float dt = moveClock.restart().asSeconds();
 		static int counter = 64;
@@ -142,16 +141,17 @@ int main() {
 		float tpx = px + dir * dt;
 		if (getBlock(world, tpx, py) == 0) px = tpx;
 
-		float pa = TILE_SIZE/2;
 		static float pv = 0;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) pv = TILE_SIZE/2;
+		
+		if (pv < -jump) pv = -jump;
 
 		float tpy = py - pv * dt;
 		if (getBlock(world, px, tpy) == 0) {
 			py = tpy;
-			pv -= pa * dt;
+			pv -= gravity * dt;
 			if (pv < -TILE_SIZE) pv = -TILE_SIZE;
-		} else pv = 0;
+		} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) and pv <= 0) pv = jump;
+		else pv = 0;
 
 	// camera move
 	// if → while (if velosity fill be greater)
@@ -385,5 +385,5 @@ descriptor[chunk->chunk[y][x]%16](window, (cx*CHUNK_SIZE + x)*TILE_SIZE - tx, (c
     //    rect.setFillColor(sf::Color::Red);
     //    window.draw(rect);
     //}
-    drawPlayer(window, 2*px*TILE_SIZE);
+    drawPlayer(window, 1.5 * px*TILE_SIZE);
 }
